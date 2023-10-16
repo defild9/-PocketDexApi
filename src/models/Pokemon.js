@@ -34,6 +34,9 @@ const PokemonSchema = new mongoose.Schema({
   description: {
     type: String,
     require: true
+  },
+  pokemonImage: {
+    type: String
   }
 })
 
