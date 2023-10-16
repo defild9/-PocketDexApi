@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 import EvolutionSchema from './Evolution'
-import PokemonStatsShema from './PokemonStats'
+import PokemonStatsSchema from './PokemonStats'
 
 const PokemonSchema = new mongoose.Schema({
   name: {
@@ -24,7 +24,7 @@ const PokemonSchema = new mongoose.Schema({
     default: []
   },
   stats: {
-    type: PokemonStatsShema,
+    type: PokemonStatsSchema,
     require: true
   },
   evolutions: {
