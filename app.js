@@ -3,6 +3,7 @@ import authRoutes from './src/routes/authRoutes.js'
 import userRoutes from './src/routes/userRoutes.js'
 import pokemonsRoutes from './src/routes/pokemonsRoutes.js'
 import dotenv from 'dotenv'
+import './src/data/database.js'
 
 dotenv.config()
 
