@@ -1,7 +1,10 @@
 import express from 'express'
-import authRoutes from './routes/authRoutes.js'
-import userRoutes from './routes/userRoutes.js'
-import pokemonsRoutes from './routes/pokemonsRoutes.js'
+import authRoutes from './src/routes/authRoutes.js'
+import userRoutes from './src/routes/userRoutes.js'
+import pokemonsRoutes from './src/routes/pokemonsRoutes.js'
+import dotenv from 'dotenv'
+
+dotenv.config()
 
 const app = express()
 
