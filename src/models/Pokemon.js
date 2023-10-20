@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
-import EvolutionSchema from './Evolution'
-import PokemonStatsSchema from './PokemonStats'
+import EvolutionSchema from './Evolution.js'
+import PokemonStatsSchema from './PokemonStats.js'
 
 const PokemonSchema = new mongoose.Schema({
   name: {
