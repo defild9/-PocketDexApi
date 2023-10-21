@@ -2,12 +2,15 @@ import express from 'express'
 import authRoutes from './src/routes/authRoutes.js'
 import userRoutes from './src/routes/userRoutes.js'
 import pokemonsRoutes from './src/routes/pokemonsRoutes.js'
+import passport from './src/auth/passportConfig.js'
 import dotenv from 'dotenv'
 import './src/data/database.js'
 
 dotenv.config()
 
 const app = express()
+
+app.use(passport.initialize())
 
 app.use(express.json())
 
