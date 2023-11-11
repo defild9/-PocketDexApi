@@ -9,7 +9,6 @@ export const register = async (req, res) => {
     const password = req.body.password
     const salt = await bcrypt.genSalt(10)
     const hash = await bcrypt.hash(password, salt)
-    const secretKey = process.env.SECRET_KEY
 
     const doc = new UserModel({
       username: req.body.username,
@@ -19,21 +18,10 @@ export const register = async (req, res) => {
 
     const user = await doc.save()
 
-    const token = jwt.sign(
-      {
-        _id: user._id
-      },
-      secretKey,
-      {
-        expiresIn: '30d'
-      }
-    )
-
     const { passwordHash, ...userData } = user._doc
 
     res.json({
-      ...userData,
-      token
+      ...userData
     }
     )
   } catch (error) {
@@ -49,14 +37,14 @@ export const login = async (req, res) => {
   try {
     const user = await UserModel.findOne({ email: req.body.email })
     if (!user) {
-      return req.status(404).json({
+      return res.status(404).json({
         message: 'User not found'
       })
     }
 
     const isValidPass = await bcrypt.compare(req.body.password, user._doc.passwordHash)
     if (!isValidPass) {
-      return req.status(400).json({
+      return res.status(400).json({
         message: 'Invalid login or password'
       })
     }
@@ -76,12 +64,11 @@ export const login = async (req, res) => {
     res.json({
       ...userData,
       token
-    }
-    )
+    })
   } catch (error) {
     console.log(error)
     res.status(500).json({
-      message: 'Failed to authorise'
+      message: 'Failed to authorize'
     })
   }
 }
