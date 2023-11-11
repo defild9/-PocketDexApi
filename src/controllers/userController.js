@@ -98,7 +98,39 @@ export const addPokemonToCollection = async (req, res) => {
 
     await user.save()
 
-    res.status(200).json({ message: 'Pokemon added to collection successfully' });
+    res.status(200).json({ message: 'Pokemon added to collection successfully' })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({
+      message: 'Failed to add pokemon to collection'
+    })
+  }
+}
+
+export const removePokemonFromCollection = async (req, res) => {
+  try {
+    const userId = req.userId
+    const pokemonId = req.body.pokemonId
+
+    const user = await UserModel.findById(userId)
+    const pokemon = await PokemonModel.findById(pokemonId)
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' })
+    }
+
+    if (!pokemon) {
+      return res.status(404).json({ message: 'Pokemon not found' })
+    }
+
+    if (!user.pokemonCollection.includes(pokemonId)) {
+      return res.status(400).json({ message: 'Pokemon is not in the collection' })
+    }
+
+    const updatedCollection = user.pokemonCollection.filter(id => id.toString() !== pokemonId.toString())
+    await UserModel.findByIdAndUpdate(userId, { $set: { pokemonCollection: updatedCollection } });
+
+    res.status(200).json({ message: 'Pokemon removed from collection successfully' })
   } catch (error) {
     console.log(error)
     res.status(500).json({
