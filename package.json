@@ -2,7 +2,7 @@
   "name": "pokemon.api",
   "version": "1.0.0",
   "description": "Pokemon Api",
-  "main": "src/app.js",
+  "main": "app.js",
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
